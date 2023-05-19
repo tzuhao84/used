@@ -1,0 +1,30 @@
+import matplotlib.pyplot as plt
+import datetime
+start = datetime.datetime.now()
+
+Timelist = []
+Voltagelist = []
+
+
+with open("Output_file.txt", 'r') as f:
+    for line in f.readlines():
+        line = line.split(' ')
+        time = float(line[0])
+        voltage = float(line[1])
+
+        Timelist.append(time)
+        Voltagelist.append(voltage)
+
+print(len(Voltagelist))
+
+# binwidth = 0.02
+# plt.hist(data, bins=range(min(Voltagelist), max(Voltagelist) + binwidth, binwidth),
+#          edgecolor="yellow", color="brown")
+
+plt.hist(Voltagelist)
+
+end = datetime.datetime.now()
+# print('end=', end)
+CalcTime = (end - start).seconds
+print(f'Calculation time: {CalcTime} seconds.')
+plt.show()
