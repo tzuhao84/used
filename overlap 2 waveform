@@ -1,0 +1,36 @@
+import sys
+import matplotlib.pyplot as plt
+
+Time_lumerical = []
+Voltage_lumerical = []
+
+Time_ADS = []
+Voltage_ADS = []
+
+with open('lumerical_gen_waveform.txt', 'r') as f:
+    for line in f.readlines()[1:-1]:
+        line = line.split(',')
+
+        time = float(line[0])
+        voltage = float(line[1])
+
+        Time_lumerical.append(time)
+        Voltage_lumerical.append(voltage)
+
+with open('ADS_gen_waveform.txt', 'r') as f:
+    for line in f.readlines()[0:-1]:
+        line = line.split(' ')
+
+        time = float(line[0])
+        voltage = float(line[1])
+
+        Time_ADS.append(time)
+        Voltage_ADS.append(voltage)
+
+plt.plot(Time_ADS, Voltage_ADS,Time_lumerical, Voltage_lumerical)
+plt.legend(["ADS", "Lumerical"], loc ="lower right")
+# plt.plot(Time_lumerical, Voltage_lumerical)
+plt.xlim(0, max(Time_lumerical))
+plt.xlabel('time')
+plt.ylabel('voltage')
+plt.show()
